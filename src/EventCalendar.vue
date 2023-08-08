@@ -38,15 +38,15 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="main-content">
-      <component
-        :is="mainContent"
-        :extended="extendedMonth"
-        :months="calendar.selectedDate.months"
-        :month="calendar.selectedDate.month"
-        :day="calendar.selectedDate"
-      />
+      <div class="main-content">
+        <component
+          :is="mainContent"
+          :extended="extendedMonth"
+          :months="calendar.selectedDate.months"
+          :month="calendar.selectedDate.month"
+          :day="calendar.selectedDate"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +54,11 @@
 <script>
 import { ref, watch } from 'vue';
 import { NextButton, PrevButton } from "./components/buttons";
+import Year from "./components/Year";
+import Month from "./components/Month";
+import Day from "./components/Day";
 import useCalendar from "./components/useCalendar";
+import { provideContext } from "./components/useContext";
 
 export default {
   props: ["events"],
@@ -81,6 +85,17 @@ export default {
       changeView(content, calendar.selectedDate.value, false, true);
     }
 
+    function selectMonth(month) {
+      extendedMonth.value = true;
+      changeView("month", month.fullLabel, false);
+    }
+
+    function selectDay(day) {
+      changeView("day", day.label, false);
+    }
+
+    provideContext({ selectMonth, selectDay });
+
     return {
       mainContent,
       extendedMonth,
@@ -93,7 +108,10 @@ export default {
   },
   components: {
     NextButton,
-    PrevButton
+    PrevButton,
+    Year,
+    Month,
+    Day
   }
 }
 </script>
