@@ -67,4 +67,28 @@ body {
   .month-year {
     width: 300px;
   }
+  .toggle {
+    box-shadow: 0 1px 2px #aaa;
+    display: flex;
+    .button {
+      cursor: pointer;
+      font-size: 11pt;
+      height: 48px;
+      line-height: 48px;
+      padding: 0 30px;
+      text-align: center;
+      text-decoration: none;
+      width: 100px;
+      &:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      &:last-child {
+        border-radius: 0 4px 4px 0;
+      }
+    }
+    .button-active {
+      background: var(--primary);
+      color: #fff;
+    }
+  }
 }

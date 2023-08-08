@@ -7,6 +7,36 @@
           <h2>{{calendar.selectedDate.value}}</h2>
           <NextButton @click="$emit('next', gotoNext())"/>
         </div>
+        <div class="toggle">
+          <div
+            class="button"
+            :class="{'button-active':calendar.selectedDate.type === 'day'}"
+            @click="changeContent('day')"
+          >
+            Day
+          </div>
+          <div
+            class="button"
+            :class="{'button-active': calendar.selectedDate.type === 'week'}"
+            @click="changeContent('week')"
+          >
+            Week
+          </div>
+          <div
+            class="button"
+            :class="{'button-active':calendar.selectedDate.type === 'month'}"
+            @click="changeContent('month')"
+          >
+            Month
+          </div>
+          <div
+            class="button"
+            :class="{'button-active':calendar.selectedDate.type === 'year'}"
+            @click="changeContent('year')"
+          >
+            Year
+          </div>
+        </div>
       </div>
     </div>
     <div class="main-content">
@@ -34,7 +64,7 @@ export default {
     const mainContent = ref("year");
     const extendedMonth = ref(false);
 
-    const { calendar, gotoNext, gotoPrev } = useCalendar(props.events);
+    const { calendar, changeView, gotoNext, gotoPrev } = useCalendar(props.events);
 
     watch(
       () => calendar.selectedDate,
@@ -47,12 +77,17 @@ export default {
       mainContent.value = value;
     }
 
+    function changeContent(content) {
+      changeView(content, calendar.selectedDate.value, false, true);
+    }
+
     return {
       mainContent,
       extendedMonth,
       calendar,
       gotoNext,
-      gotoPrev
+      gotoPrev,
+      changeContent
     }
   },
   components: {
