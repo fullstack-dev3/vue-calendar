@@ -53,8 +53,8 @@
 
 <script>
 import { ref, watch } from 'vue';
-import { NextButton, PrevButton } from "./buttons";
-import useCalendar from "./useCalendar";
+import { NextButton, PrevButton } from "./components/buttons";
+import useCalendar from "./components/useCalendar";
 
 export default {
   props: ["events"],
@@ -87,7 +87,8 @@ export default {
       calendar,
       gotoNext,
       gotoPrev,
-      changeContent
+      changeContent,
+      changeView
     }
   },
   components: {
@@ -97,5 +98,5 @@ export default {
 }
 </script>
 
-<style lang="scss" src="../assets/style.scss">
+<style lang="scss" src="./assets/style.scss">
 </style>
