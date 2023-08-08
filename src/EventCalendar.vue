@@ -17,13 +17,6 @@
           </div>
           <div
             class="button"
-            :class="{'button-active': calendar.selectedDate.type === 'week'}"
-            @click="changeContent('week')"
-          >
-            Week
-          </div>
-          <div
-            class="button"
             :class="{'button-active':calendar.selectedDate.type === 'month'}"
             @click="changeContent('month')"
           >
