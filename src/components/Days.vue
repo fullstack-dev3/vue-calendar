@@ -103,8 +103,20 @@ export default {
   grid-template-columns: repeat(7, 1fr);
   height: 100%
 }
-
 .month-wrapper-extended .month-wrapper__days {
   grid-template-rows: repeat(6, 128px);
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to
+{
+  opacity: 0;
+  transform: translateX(-100px);
+  transform: translateY(-10px);
 }
 </style>
