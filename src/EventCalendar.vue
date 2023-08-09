@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { NextButton, PrevButton } from "./components/buttons";
 import Year from "./components/Year";
 import Month from "./components/Month";
@@ -61,6 +61,7 @@ import Week from "./components/Week";
 import Day from "./components/Day";
 import useCalendar from "./components/useCalendar";
 import { provideContext } from "./components/useContext";
+import colors from "./components/colors";
 
 export default {
   props: ["events"],
@@ -70,7 +71,16 @@ export default {
     const mainContent = ref("year");
     const extendedMonth = ref(false);
 
-    const { calendar, changeView, gotoNext, gotoPrev } = useCalendar(props.events);
+    let coloredEvents = props.events.map((event) => {
+      event.color = colors[Math.round(Math.random() * 56) - 1];
+      return event;
+    });
+
+    const { calendar, changeView, gotoNext, gotoPrev } = useCalendar(props.events, coloredEvents);
+
+    onMounted(() => {
+      changeContent('week');
+    });
 
     watch(
       () => calendar.selectedDate,

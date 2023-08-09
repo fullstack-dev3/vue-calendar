@@ -3,25 +3,25 @@ import moment from 'moment';
 
 const useCalendar = (events) => {
   onMounted(() => {
-    calendar.weekdays = moment.weekdays();
+		calendar.weekdays = moment.weekdays();
 		calendar.weekdaysShort = moment.weekdaysShort();
 
     moment.locale('en');
 		changeView('day');
 	});
 
-  const calendar = reactive({
+	const calendar = reactive({
 		selectedDate: { type: 'year', value: new Date().getFullYear(), default: true },
 
 		weekdays: [],
 		weekdaysShort: [],
 	});
 
-  const setSelectedDate = value => {
+	const setSelectedDate = value => {
 		calendar.selectedDate = value;
 	};
 
-  const generateMonths = _year => {
+	const generateMonths = _year => {
 		return moment.months().map((label, i) => {
 			let index = i + 1;
 
@@ -29,7 +29,7 @@ const useCalendar = (events) => {
 		});
 	};
 
-  const generateMonth = _date => {
+	const generateMonth = _date => {
 		let index = _date.month() + 1;
 		let label = moment.months()[_date.month()];
 		let _year = _date.year();
@@ -37,7 +37,7 @@ const useCalendar = (events) => {
 		return getMonth(_year, index, label);
 	};
 
-  const generateWeek = _date => {
+	const generateWeek = _date => {
 		window._date = _date;
 
 		let _week = {
@@ -66,7 +66,7 @@ const useCalendar = (events) => {
 		return _week;
 	};
 
-  const getMonth = (_year, index, label) => {
+	const getMonth = (_year, index, label) => {
 		let fullLabel = `${_year}-${index}`;
 		let date = moment(fullLabel, 'YYYY-M');
 
@@ -89,7 +89,7 @@ const useCalendar = (events) => {
 		return month;
 	};
 
-  const getDay = day => {
+	const getDay = day => {
 		day.localeFormat = moment(day.label, 'YYYY-M-D').format('LL');
 		day.hours = getHours();
 		day.events = getEvents(day);
@@ -97,14 +97,14 @@ const useCalendar = (events) => {
 		return day;
 	};
 
-  const getHours = () => [...Array(24)].map((x, k) => {
-    return {
-      index: k,
-      label: `${k < 10 ? '0' + k : k}:00`,
-    };
-  });
+	const getHours = () => [...Array(24)].map((x, k) => {
+		return {
+			index: k,
+			label: `${k < 10 ? '0' + k : k}:00`,
+		};
+	});
 
-  const getEvents = day => {
+	const getEvents = day => {
 		let evts = events.filter(event => {
 			return moment(event.startDate, 'YYYY-MM-DD HH:mm').isSame(moment(day.label, 'YYYY-MM-DD HH:mm'), 'day');
 		});
@@ -112,15 +112,16 @@ const useCalendar = (events) => {
 		return evts.map(event => {
 			event.startTime = moment(event.startDate, 'YYYY-MM-DD HH:mm').format('hh:mm A');
 			event.endTime = moment(event.endDate, 'YYYY-MM-DD HH:mm').format('hh:mm A');
+			event.weekday = moment(day.label, 'YYYY-MM-DD HH:mm').weekday();
 			return event;
 		});
 	};
 
-  const changeView = (type, value, isDefault = true, toggle = false) => {
+	const changeView = (type, value, isDefault = true, toggle = false) => {
     let date = isDefault ? moment() : moment(value, 'MMMM D, YYYY');
     date = toggle && !isDefault && !moment().isSame(moment(value, 'MMMM D, YYYY'), type) ? moment() : date;
 
-    switch (type) {
+		switch (type) {
 			case 'day':
 				setSelectedDate({
 					...calendar.selectedDate,
@@ -160,7 +161,7 @@ const useCalendar = (events) => {
 			default:
 				break;
 		}
-  };
+	};
 
   const gotoNext = () => {
 		let next = moment(calendar.selectedDate.value, 'MMMM D, YYYY').add(1, calendar.selectedDate.type + 's');

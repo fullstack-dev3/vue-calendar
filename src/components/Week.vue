@@ -49,10 +49,9 @@ export default {
       focusedEvent: {}
     };
   },
-
   computed: {
     events() {
-      let _events =   this.week.weekdays
+      let _events = this.week.weekdays
         .map(wd => wd.events)
         .flat()
         .sort((a, b) => {
@@ -90,7 +89,7 @@ export default {
     }
   },
   methods: {
-   getEventsByHour(hour, day) {
+    getEventsByHour(hour, day) {
       let _events = this.events.filter(e => {
         let startHour = new Date(e.startDate).getHours();
         return startHour === hour && day === e.weekday;
