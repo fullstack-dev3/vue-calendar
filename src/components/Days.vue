@@ -24,7 +24,12 @@
             :key="'de'+index"
             class="event"
           >{{e.title}}</span>
-          <span class="event-more-indicator">+{{day.events.length - 3}}</span>
+          <span
+            v-if="day.events.length > 3"
+            class="event-more-indicator"
+          >
+            +{{day.events.length - 3}}
+          </span>
           <transition name="slide-fade" >
             <template v-if="indexDayToShowEvents == index && day.events.length > 0 ">
               <div class="more-events-wrp" :style="{left:day.weekday>3?'-150%':'50%'}">

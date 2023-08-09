@@ -91,13 +91,11 @@ export default {
     }
 
     function selectMonth(month) {
-      console.log(month)
       extendedMonth.value = true;
       changeView("month", month.fullLabel, false);
     }
 
     function selectDay(day) {
-      console.log(day)
       changeView("day", day.label, false);
     }
 
