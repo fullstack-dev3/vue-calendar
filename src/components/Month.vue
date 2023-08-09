@@ -1,6 +1,6 @@
 <template>
   <div :class="{'month-wrapper-extended':extended}" class="month-wrapper">
-    <div class="month centered-content" @click="selectMonth(month)">{{ month.label}}</div>
+    <div class="month centered-content" @click="selectMonth(month)">{{month.label}}</div>
 
     <div
       v-for="(weekday, j) in month.weekdaysShort"

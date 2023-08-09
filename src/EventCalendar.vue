@@ -75,15 +75,20 @@ export default {
     }
 
     function changeContent(content) {
+      if (content === 'month') {
+        extendedMonth.value = true;
+      }
       changeView(content, calendar.selectedDate.value, false, true);
     }
 
     function selectMonth(month) {
+      console.log(month)
       extendedMonth.value = true;
       changeView("month", month.fullLabel, false);
     }
 
     function selectDay(day) {
+      console.log(day)
       changeView("day", day.label, false);
     }
 
