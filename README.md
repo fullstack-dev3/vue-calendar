@@ -1,5 +1,7 @@
 # vue-calendar
 
+Visit the site: https://vue-calendar-topaz.vercel.app
+
 ## Project setup
 ```
 npm install
