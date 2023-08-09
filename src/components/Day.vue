@@ -13,7 +13,8 @@
     <div class="full-day-events">
       <div
         v-for="(event, index) in day.events"
-        :key="index"
+        :key="'fd'+index"
+        :index="index"
         :style="{gridRow:new Date(event.startDate).getHours() + 1 +'/span ' +(new Date(event.endDate).getHours() - new Date(event.startDate).getHours() + 1),}"
         class="full-day-event"
       >
@@ -33,3 +34,19 @@ export default {
   props: ["day"]
 };
 </script>
+
+<style lang="scss">
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  position: absolute;
+  transition: all 1s;
+
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+</style>

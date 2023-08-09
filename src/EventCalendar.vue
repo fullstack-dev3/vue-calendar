@@ -17,6 +17,13 @@
           </div>
           <div
             class="button"
+            :class="{'button-active':calendar.selectedDate.type === 'week'}"
+            @click="changeContent('week');"
+          >
+            Week
+          </div>
+          <div
+            class="button"
             :class="{'button-active':calendar.selectedDate.type === 'month'}"
             @click="changeContent('month')"
           >
@@ -37,6 +44,7 @@
           :extended="extendedMonth"
           :months="calendar.selectedDate.months"
           :month="calendar.selectedDate.month"
+          :week="calendar.selectedDate.week"
           :day="calendar.selectedDate"
         />
       </div>
@@ -49,6 +57,7 @@ import { ref, watch } from 'vue';
 import { NextButton, PrevButton } from "./components/buttons";
 import Year from "./components/Year";
 import Month from "./components/Month";
+import Week from "./components/Week";
 import Day from "./components/Day";
 import useCalendar from "./components/useCalendar";
 import { provideContext } from "./components/useContext";
@@ -109,6 +118,7 @@ export default {
     PrevButton,
     Year,
     Month,
+    Week,
     Day
   }
 }

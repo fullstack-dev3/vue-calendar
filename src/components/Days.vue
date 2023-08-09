@@ -19,9 +19,13 @@
       </sup>
       <template v-if="month.extended && day.events.length > 0">
         <div class="day-events">
-          <span v-for="(e, index) in sliceEvents(day.events)" :key="'de'+index" class="event">{{e.title}}</span>
-          <span class="event-more-indicator" v-if="day.events.length>3">+{{day.events.length - 3}}</span>
-          <transition name="slide-fade">
+          <span
+            v-for="(e, index) in sliceEvents(day.events)"
+            :key="'de'+index"
+            class="event"
+          >{{e.title}}</span>
+          <span class="event-more-indicator">+{{day.events.length - 3}}</span>
+          <transition name="slide-fade" >
             <template v-if="indexDayToShowEvents == index && day.events.length > 0 ">
               <div class="more-events-wrp" :style="{left:day.weekday>3?'-150%':'50%'}">
                 <div class="more-events">
